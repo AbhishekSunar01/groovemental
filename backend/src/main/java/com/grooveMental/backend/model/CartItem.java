@@ -1,4 +1,4 @@
-package com.grooveMental.backend.entity;
+package com.grooveMental.backend.model;
 
 import jakarta.persistence.*;
 
@@ -11,7 +11,7 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
-    private Instrument instrument;
+    private Clothe clothe;
 
     @ManyToOne
     private Cart cart;

@@ -1,20 +1,21 @@
-package com.grooveMental.backend.entity;
+package com.grooveMental.backend.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Cart {
+@Table(name = "`order`")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private User user;
+    private LocalDateTime orderDate;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<CartItem> cartItems;
+    @OneToMany
+    private List<CartItem> items;
 
     @ManyToOne
     private PaymentStatus paymentStatus;

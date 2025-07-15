@@ -1,11 +1,13 @@
-package com.grooveMental.backend.entity;
+package com.grooveMental.backend.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User {
 
     @Id
@@ -18,13 +20,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String email;
     private String role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
 
     @OneToMany(mappedBy = "seller")
-    private List<Instrument> instruments;
+    private List<Clothe> clothes;
 
     @OneToMany(mappedBy = "user")
     private List<CartItem> cartItems;

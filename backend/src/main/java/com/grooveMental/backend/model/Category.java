@@ -1,4 +1,4 @@
-package com.grooveMental.backend.entity;
+package com.grooveMental.backend.model;
 
 import jakarta.persistence.*;
 
@@ -12,6 +12,6 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<Instrument> instruments;
+    private List<Clothe> clothes;
 }
 

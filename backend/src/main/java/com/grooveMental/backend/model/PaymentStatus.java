@@ -1,4 +1,4 @@
-package com.grooveMental.backend.entity;
+package com.grooveMental.backend.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
