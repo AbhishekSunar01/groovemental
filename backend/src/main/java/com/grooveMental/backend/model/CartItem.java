@@ -14,6 +14,7 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference(value = "clothe-cartitem")
     private Clothe clothe;
 
     @ManyToOne

@@ -140,6 +140,16 @@ public class CartService {
             clotheDto.setPrice(item.getClothe().getPrice());
             clotheDto.setDescription(item.getClothe().getDescription());
 
+            // Map images from Clothe to ClotheDto.ImageDto
+            List<CartItemResponseDto.ClotheDto.ImageDto> images = item.getClothe().getImages().stream().map(img -> {
+                CartItemResponseDto.ClotheDto.ImageDto imgDto = new CartItemResponseDto.ClotheDto.ImageDto();
+                imgDto.setId(img.getId());
+                imgDto.setUrl(img.getUrl());
+                return imgDto;
+            }).toList();
+
+            clotheDto.setImages(images);
+
             itemDto.setClothe(clotheDto);
             return itemDto;
         }).toList();
@@ -147,4 +157,5 @@ public class CartService {
         dto.setCartItems(itemDtos);
         return dto;
     }
+
 }

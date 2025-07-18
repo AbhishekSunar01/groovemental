@@ -24,6 +24,9 @@
         @Column(nullable = false)
         private String description;
 
+        @OneToMany(mappedBy = "clothe", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<Image> images;
+
         @ManyToOne
         @JsonBackReference
         private Category category;
@@ -32,7 +35,7 @@
         private User seller;
 
         @OneToMany(mappedBy = "clothe")
-        @JsonManagedReference
+        @JsonManagedReference(value = "clothe-cartitem")
         private List<CartItem> cartItems;
     }
 

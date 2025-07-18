@@ -3,6 +3,7 @@ package com.grooveMental.backend.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class CartItemResponseDto {
@@ -17,6 +18,12 @@ public class CartItemResponseDto {
         private String name;
         private BigDecimal price;
         private String description;
+        private List<ImageDto> images;  // Add this
+
+        @Data
+        public static class ImageDto {
+            private Long id;
+            private String url;
+        }
     }
 }
-

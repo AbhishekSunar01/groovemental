@@ -47,7 +47,7 @@ public class SecurityConfig {
         return security
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(customizer -> customizer
-                        .requestMatchers("/register", "/login").permitAll()
+                        .requestMatchers("/register", "/login", "/images/*").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

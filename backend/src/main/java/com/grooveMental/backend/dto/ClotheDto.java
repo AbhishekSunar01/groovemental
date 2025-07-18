@@ -1,11 +1,19 @@
 package com.grooveMental.backend.dto;
 
-import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ClotheDto {
     private Long id;
     private String name;
     private BigDecimal price;
     private String description;
-    // no seller clothes list or seller details to avoid cycles
+    private List<String> imageUrls;
 }
