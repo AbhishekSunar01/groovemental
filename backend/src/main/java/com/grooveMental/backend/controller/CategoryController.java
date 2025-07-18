@@ -1,6 +1,7 @@
 package com.grooveMental.backend.controller;
 
 import com.grooveMental.backend.dto.ApiResponseDto;
+import com.grooveMental.backend.dto.CategoryDto;
 import com.grooveMental.backend.model.Category;
 import com.grooveMental.backend.service.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -19,24 +20,24 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponseDto<Category>> createCategory(@RequestBody Category category) {
-        Category saved = categoryService.createCategory(category);
+    public ResponseEntity<ApiResponseDto<CategoryDto>> createCategory(@RequestBody Category category) {
+        CategoryDto saved = categoryService.createCategory(category);
         return ResponseEntity.ok(
                 new ApiResponseDto<>(true, "Category created successfully", saved)
         );
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponseDto<List<Category>>> getAllCategories() {
-        List<Category> categories = categoryService.getAllCategories();
+    public ResponseEntity<ApiResponseDto<List<CategoryDto>>> getAllCategories() {
+        List<CategoryDto> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(
                 new ApiResponseDto<>(true, "Category list fetched", categories)
         );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<Category>> getCategoryById(@PathVariable Long id) {
-        Category category = categoryService.getCategoryById(id);
+    public ResponseEntity<ApiResponseDto<CategoryDto>> getCategoryById(@PathVariable Long id) {
+        CategoryDto category = categoryService.getCategoryById(id);
         if (category != null) {
             return ResponseEntity.ok(new ApiResponseDto<>(true, "Category found", category));
         } else {

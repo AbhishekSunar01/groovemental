@@ -1,5 +1,6 @@
 package com.grooveMental.backend.service;
 
+import com.grooveMental.backend.dto.CategoryDto;
 import com.grooveMental.backend.model.Category;
 import com.grooveMental.backend.repository.CategoryRepo;
 import org.springframework.stereotype.Service;
@@ -15,16 +16,21 @@ public class CategoryService {
         this.categoryRepo = categoryRepo;
     }
 
-    public Category createCategory(Category category) {
-        return categoryRepo.save(category);
+    public CategoryDto createCategory(Category category) {
+        categoryRepo.save(category);
+        return new CategoryDto(category.getId(), category.getName());
     }
 
-    public List<Category> getAllCategories() {
-        return categoryRepo.findAll();
+    public List<CategoryDto> getAllCategories() {
+        return categoryRepo.findAll().stream()
+                .map(category -> new CategoryDto(category.getId(), category.getName()))
+                .toList();
     }
 
-    public Category getCategoryById(Long id) {
-        return categoryRepo.findById(id).orElse(null);
+    public CategoryDto getCategoryById(Long id) {
+        Category category = categoryRepo.findById(id).orElse(null);
+        assert category != null;
+        return new CategoryDto(category.getId(), category.getName());
     }
 
     public void deleteCategory(Long id) {

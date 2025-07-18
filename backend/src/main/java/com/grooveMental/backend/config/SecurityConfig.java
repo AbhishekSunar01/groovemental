@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(customizer -> customizer
                         .requestMatchers("/register", "/login").permitAll()
                         .anyRequest().authenticated())
-                        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
