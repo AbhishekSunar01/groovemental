@@ -3,7 +3,7 @@ package com.grooveMental.backend.dto;
 import lombok.Data;
 
 @Data
-public class RegisterResDto {
+public class LoginRequestDto {
     private String username;
-    private String role;
+    private String password;
 }

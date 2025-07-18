@@ -18,10 +18,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ApiResponseDto<RegisterResDto>> register(@RequestBody RegisterReqDto registerReqDto) {
-        User user = authService.register(registerReqDto);
+    public ResponseEntity<ApiResponseDto<RegisterResponseDto>> register(@RequestBody RegisterRequestDto registerRequestDto) {
+        User user = authService.register(registerRequestDto);
 
-        RegisterResDto response = new RegisterResDto();
+        RegisterResponseDto response = new RegisterResponseDto();
         response.setUsername(user.getUsername());
         response.setRole(user.getRole());
 
@@ -32,8 +32,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponseDto<LoginResDto>> login(@RequestBody LoginReqDto loginReqDto) {
-        LoginResDto response = authService.login(loginReqDto);
+    public ResponseEntity<ApiResponseDto<LoginResponseDto>> login(@RequestBody LoginRequestDto loginRequestDto) {
+        LoginResponseDto response = authService.login(loginRequestDto);
         return ResponseEntity.ok(new ApiResponseDto<>(true, "Login successfully", response));
     }
 

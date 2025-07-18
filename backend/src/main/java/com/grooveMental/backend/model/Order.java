@@ -1,11 +1,14 @@
 package com.grooveMental.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "`order`")
 public class Order {
     @Id
@@ -18,6 +21,7 @@ public class Order {
     private List<CartItem> items;
 
     @ManyToOne
+    @JsonBackReference
     private PaymentStatus paymentStatus;
 }
 
