@@ -18,7 +18,7 @@ public class CartItemResponseDto {
         private String name;
         private BigDecimal price;
         private String description;
-        private List<ImageDto> images;  // Add this
+        private List<ImageDto> images;
 
         @Data
         public static class ImageDto {

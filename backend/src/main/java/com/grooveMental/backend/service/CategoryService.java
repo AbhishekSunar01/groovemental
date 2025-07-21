@@ -1,7 +1,9 @@
 package com.grooveMental.backend.service;
 
 import com.grooveMental.backend.dto.CategoryDto;
+import com.grooveMental.backend.dto.CategoryResponseDto;
 import com.grooveMental.backend.model.Category;
+import com.grooveMental.backend.repository.CartRepo;
 import com.grooveMental.backend.repository.CategoryRepo;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,11 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepo categoryRepo;
+    private final CartRepo cartRepo;
 
-    public CategoryService(CategoryRepo categoryRepo) {
+    public CategoryService(CategoryRepo categoryRepo, CartRepo cartRepo) {
         this.categoryRepo = categoryRepo;
+        this.cartRepo = cartRepo;
     }
 
     public CategoryDto createCategory(Category category) {
@@ -21,9 +25,13 @@ public class CategoryService {
         return new CategoryDto(category.getId(), category.getName());
     }
 
-    public List<CategoryDto> getAllCategories() {
+    public List<CategoryResponseDto> getAllCategories() {
         return categoryRepo.findAll().stream()
-                .map(category -> new CategoryDto(category.getId(), category.getName()))
+                .map(category -> new CategoryResponseDto(
+                        category.getId(),
+                        category.getName(),
+                        category.getClothes() != null ? category.getClothes().size() : 0
+                ))
                 .toList();
     }
 

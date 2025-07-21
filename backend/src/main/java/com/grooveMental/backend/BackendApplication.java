@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.grooveMental.backend.repository")
 @EntityScan(basePackages = "com.grooveMental.backend.model")
 @ComponentScan(basePackages = "com.grooveMental.backend")
-public class  BackendApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);

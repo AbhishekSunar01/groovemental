@@ -2,9 +2,11 @@ package com.grooveMental.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -45,9 +47,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configuration(HttpSecurity security) throws Exception {
         return security
+                .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(customizer -> customizer
-                        .requestMatchers("/register", "/login", "/images/*").permitAll()
+                        // Allow unauthenticated OPTIONS requests (CORS preflight)
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        // Allow public endpoints
+                        .requestMatchers(HttpMethod.POST, "/api/register", "/api/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/images/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/clothes", "/api/categories").permitAll()
+
+                        // Secure /api/clothes/save to authenticated USER role only
+                        .requestMatchers("/api/clothes/save").hasRole("USER")
+
+                        // Any other requests require authentication
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

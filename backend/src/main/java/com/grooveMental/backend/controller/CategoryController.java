@@ -2,6 +2,7 @@ package com.grooveMental.backend.controller;
 
 import com.grooveMental.backend.dto.ApiResponseDto;
 import com.grooveMental.backend.dto.CategoryDto;
+import com.grooveMental.backend.dto.CategoryResponseDto;
 import com.grooveMental.backend.model.Category;
 import com.grooveMental.backend.service.CategoryService;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -28,8 +30,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponseDto<List<CategoryDto>>> getAllCategories() {
-        List<CategoryDto> categories = categoryService.getAllCategories();
+    public ResponseEntity<ApiResponseDto<List<CategoryResponseDto>>> getAllCategories() {
+        List<CategoryResponseDto> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(
                 new ApiResponseDto<>(true, "Category list fetched", categories)
         );

@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clothes")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ClotheController {
 
     private final ClotheService clotheService;
@@ -38,7 +39,7 @@ public class ClotheController {
     }
 
     @PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ApiResponseDto> addClothe(
+    public ResponseEntity<ApiResponseDto<ClotheResponseDto>> addClothe(
             @RequestParam("name") String name,
             @RequestParam("price") BigDecimal price,
             @RequestParam("description") String description,
